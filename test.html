@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1440, initial-scale=1" />
+  <title>QSCCII 테스트</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <section class="page qscc-test">
+    <!-- [공통 헤더: 로고121x60 → 166px → 메뉴 → 238px → 프로필50x50] -->
+    <header class="qscc-header">
+      <div class="header-inner">
+        <a href="./index.html" class="logo" aria-label="ieum 로고">
+          <img src="/images/logo.png" alt="">
+        </a>
+        <div class="gap-166" aria-hidden="true"></div>
+        <nav class="gnb" aria-label="주 메뉴">
+          <ul>
+            <li><a href="./whatisqscc.html">About Us</a></li>
+            <li><a href="./test.html#q=1">Test</a></li>
+            <li><a href="#">Input</a></li>
+            <li><a href="#">AI Chat</a></li>
+            <li><a href="#">More</a></li>
+          </ul>
+        </nav>
+        <div class="gap-238" aria-hidden="true"></div>
+        <button class="profile" type="button" aria-label="프로필">
+          <img src="/images/profile.svg" alt="">
+        </button>
+      </div>
+    </header>
+
+    <!-- 문제 영역: 헤더에서 정확히 120px 아래 -->
+    <div class="wrap">
+      <div class="q-card" id="qcard" hidden>
+        <h2 class="q-title" id="qtitle">Q1.</h2>
+        <p class="q-text" id="qtext">당신의 체격은 어떻습니까?</p>
+
+        <!-- 옵션 3개: 190 x 453 박스 -->
+        <div class="opts-grid" id="opts" role="radiogroup" aria-label="선택지"></div>
+
+        <!-- 하단 네비게이션 -->
+        <div class="nav">
+          <button class="btn btn-prev" id="prev" type="button">이전</button>
+          <div id="pager" class="pager"></div>
+          <button class="btn btn-next" id="next" type="button" disabled>다음</button>
+        </div>
+      </div>
+
+      <!-- 결과 영역 -->
+      <div id="result" class="q-card" hidden></div>
+    </div>
+  </section>
+
+  <script src="/test.js"></script>
+</body>
+</html>

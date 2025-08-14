@@ -1,35 +1,56 @@
 {
-  "version": "1.1",
+  "version": "1.0",
   "title": "QSCC-II",
-  "types": ["태양인","태음인","소양인","소음인"],
-  "scoring": { "method": "sum", "tieBreaker": ["태양인","태음인","소양인","소음인"] },
+  "types": [
+    "태양인",
+    "태음인",
+    "소양인",
+    "소음인"
+  ],
+  "scoring": {
+    "method": "sum",
+    "tieBreaker": [
+      "태양인",
+      "태음인",
+      "소양인",
+      "소음인"
+    ]
+  },
   "questions": [
     {
       "id": 1,
       "title": "Q1.",
       "text": "당신의 체격은 어떻습니까?",
-      "layout": { "columns": 3, "imageAspect": "3:5" },
       "options": [
         {
           "id": "A",
-          "label": "큰 편이다",
-          "desc": "어깨·흉곽이 발달했고 체중 변화가 비교적 적다.",
-          "image": { "src": "/public/images/test/q1_A.png", "alt": "큰 체격 실루엣" },
-          "scores": { "태양인":2, "태음인":2, "소양인":0, "소음인":0 }
+          "label": "체격이 큰편이다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "체격이 큰편이다."
+          },
+          "scores": {}
         },
         {
           "id": "B",
-          "label": "보통이다",
-          "desc": "평균적인 체격, 과체중·저체중 모두 아님.",
-          "image": { "src": "/public/images/test/q1_B.png", "alt": "보통 체격 실루엣" },
-          "scores": { "태양인":1, "태음인":1, "소양인":1, "소음인":1 }
+          "label": "체격이 큰편이다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "체격이 큰편이다."
+          },
+          "scores": {}
         },
         {
           "id": "C",
-          "label": "작은 편이다",
-          "desc": "전체적으로 마른 체형, 체중 변동이 있는 편.",
-          "image": { "src": "/public/images/test/q1_C.png", "alt": "작은 체격 실루엣" },
-          "scores": { "태양인":0, "태음인":0, "소양인":2, "소음인":2 }
+          "label": "체격이 큰편이다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "체격이 큰편이다."
+          },
+          "scores": {}
         }
       ],
       "required": true
@@ -38,28 +59,1642 @@
       "id": 2,
       "title": "Q2.",
       "text": "당신의 체형은 어떻습니까?",
-      "layout": { "columns": 3, "imageAspect": "3:5" },
       "options": [
         {
           "id": "A",
-          "label": "뚱뚱한 편이다",
-          "desc": "복부·허리둘레가 두드러진다.",
-          "image": { "src": "/public/images/test/q2_A.png", "alt": "비만형 실루엣" },
-          "scores": { "태음인":2 }
+          "label": "뚱뚱한 편이다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "뚱뚱한 편이다."
+          },
+          "scores": {}
         },
         {
           "id": "B",
-          "label": "보통이다",
-          "desc": "정상 체지방 범주.",
-          "image": { "src": "/public/images/test/q2_B.png", "alt": "보통형 실루엣" },
-          "scores": { "소양인":1, "소음인":1 }
+          "label": "보통이다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "보통이다."
+          },
+          "scores": {}
         },
         {
           "id": "C",
-          "label": "마른 편이다",
-          "desc": "피하지방이 적고 근육량도 적은 편.",
-          "image": { "src": "/public/images/test/q2_C.png", "alt": "마른형 실루엣" },
-          "scores": { "소양인":2, "소음인":2 }
+          "label": "마른 편이다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "마른 편이다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 3,
+      "title": "Q3.",
+      "text": "당신의 체형에서 상하체의 관계는 어떻습니까?",
+      "options": [
+        {
+          "id": "A",
+          "label": "상체가 하체에 비하여 발달되어 있다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "상체가 하체에 비하여 발달되어 있다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "하체가 상체에 비하여 발달되어 있다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "하체가 상체에 비하여 발달되어 있다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "C",
+          "label": "상하체가 비슷하다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "상하체가 비슷하다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 4,
+      "title": "Q4.",
+      "text": "다음중 당신의 체형은 어디에 해당됩니까?",
+      "options": [
+        {
+          "id": "A",
+          "label": "목덜미부위가 잘 발달하고 허리부분이 빈약하다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "목덜미부위가 잘 발달하고 허리부분이 빈약하다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "가슴부위가 잘 발달하고 엉덩이부위가 빈약하다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "가슴부위가 잘 발달하고 엉덩이부위가 빈약하다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "C",
+          "label": "엉덩이부위가 잘 발달하고, 목덜미부위와 허리부위가 빈약하다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "엉덩이부위가 잘 발달하고, 목덜미부위와 허리부위가 빈약하다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "D",
+          "label": "엉덩이부위가 잘 발달하였고 가슴부위가 빈약하다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "엉덩이부위가 잘 발달하였고 가슴부위가 빈약하다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 5,
+      "title": "Q5.",
+      "text": "전체적인 외모와 골격은 다음중 어디에 해당됩니까?",
+      "options": [
+        {
+          "id": "A",
+          "label": "골격이 크고 살이 잘 찐 편이다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "골격이 크고 살이 잘 찐 편이다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "골격이 작고 균형이 잘있다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "골격이 작고 균형이 잘있다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "C",
+          "label": "보통이며 단단한 체격이다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "보통이며 단단한 체격이다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 6,
+      "title": "Q6.",
+      "text": "당신의 가슴은 다음중 어디에 해당됩니까?",
+      "options": [
+        {
+          "id": "A",
+          "label": "넓고 잘 발달되어 있다. (비만형)",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "넓고 잘 발달되어 있다. (비만형)"
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "빈약하고 구부정하다. (세장형)",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "빈약하고 구부정하다. (세장형)"
+          },
+          "scores": {}
+        },
+        {
+          "id": "C",
+          "label": "넓고 튼튼한 편이다. (근육형)",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "넓고 튼튼한 편이다. (근육형)"
+          },
+          "scores": {}
+        },
+        {
+          "id": "D",
+          "label": "가슴이 벌어지고 견실하다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "가슴이 벌어지고 견실하다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 7,
+      "title": "Q7.",
+      "text": "당신은 다음중 어떤 음식을 좋아하십니까?",
+      "options": [
+        {
+          "id": "A",
+          "label": "뜨거운 음식",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "뜨거운 음식"
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "따뜻한 음식",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "따뜻한 음식"
+          },
+          "scores": {}
+        },
+        {
+          "id": "C",
+          "label": "시원한 음식",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "시원한 음식"
+          },
+          "scores": {}
+        },
+        {
+          "id": "D",
+          "label": "차가운 음식",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "차가운 음식"
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 8,
+      "title": "Q8.",
+      "text": "당신은 다음중 어디에 해당됩니까?",
+      "options": [
+        {
+          "id": "A",
+          "label": "손, 발이 잘 찬 편이다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "손, 발이 잘 찬 편이다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "평소 손, 발이 따뜻한 편이다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "평소 손, 발이 따뜻한 편이다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 9,
+      "title": "Q9.",
+      "text": "당신의 걸음걸이는 다음중 어디에 해당됩니까?",
+      "options": [
+        {
+          "id": "A",
+          "label": "걸음이 느리고 무게 있게 걷는다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "걸음이 느리고 무게 있게 걷는다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "걸음걸이가 자연스럽고 얌전하다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "걸음걸이가 자연스럽고 얌전하다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "C",
+          "label": "걸음이 빠르고 몸을 흔든다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "걸음이 빠르고 몸을 흔든다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "D",
+          "label": "걸음걸이가 꼿꼿하다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "걸음걸이가 꼿꼿하다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 10,
+      "title": "Q10.",
+      "text": "당신은 다음중 어디에 해당됩니까?",
+      "options": [
+        {
+          "id": "A",
+          "label": "평소에 땀이 많고 땀을 흘리면 오히려 상쾌하다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "평소에 땀이 많고 땀을 흘리면 오히려 상쾌하다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "평소에 땀이 많지 않고 조금만 땀을 내도 피곤하다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "평소에 땀이 많지 않고 조금만 땀을 내도 피곤하다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "C",
+          "label": "땀을 흘려도 그다지 피곤하지 않다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "땀을 흘려도 그다지 피곤하지 않다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 11,
+      "title": "Q11.",
+      "text": "당신은 다음중 어디에 해당됩니까?",
+      "options": [
+        {
+          "id": "A",
+          "label": "거침없고 과단성이 있다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "거침없고 과단성이 있다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "활동적이고 용감하다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "활동적이고 용감하다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "C",
+          "label": "용모가 의젓하고 격식을 차리는 편이다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "용모가 의젓하고 격식을 차리는 편이다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "D",
+          "label": "태도가 온순하고 꾸밈이 없다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "태도가 온순하고 꾸밈이 없다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 12,
+      "title": "Q12.",
+      "text": "다음중 당신은 어느 쪽입니까? (일처리 또는 생활습관)",
+      "options": [
+        {
+          "id": "A",
+          "label": "무슨 일이든지 물러서지 않고 밀고 나간다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "C",
+          "label": "움직이기보다는 조용히 혼자 일을 추진하는 편이다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "움직이기보다는 조용히 혼자 일을 추진하는 편이다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "D",
+          "label": "한곳에 있을려고만하지 나다니려하지 않는 편이다.",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "한곳에 있을려고만하지 나다니려하지 않는 편이다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 13,
+      "title": "Q13.",
+      "text": "무슨 일이나 시원스럽게 처리한다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 14,
+      "title": "Q14.",
+      "text": "활발하고 대가 센 편이다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 15,
+      "title": "Q15.",
+      "text": "매사에 이해를 따지지 않고 나서는 편이다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 16,
+      "title": "Q16.",
+      "text": "진득하게 한곳에 오래 있을 수 있다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 17,
+      "title": "Q17.",
+      "text": "치밀하고 꼼꼼한 편이다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 18,
+      "title": "Q18.",
+      "text": "가까운 사람끼리만 어울리는 편이다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 19,
+      "title": "Q19.",
+      "text": "사람을 사귈 때 이것저것 따지지않고 쉽게 잘사귄다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 20,
+      "title": "Q20.",
+      "text": "사회적인 일보다 개인적인 일에 열심이다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 21,
+      "title": "Q21.",
+      "text": "내면적인 것보다 외면적인 것을 더 중요시한다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 22,
+      "title": "Q22.",
+      "text": "사람을 사귈 때 이것저것 따져서 쉽게 사귀지 못하는 편이다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 23,
+      "title": "Q23.",
+      "text": "단정하고 신중하다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 24,
+      "title": "Q24.",
+      "text": "성격이 시원시원하다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 25,
+      "title": "Q25.",
+      "text": "다정 다감하여 남을 잘 달랜다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 26,
+      "title": "Q26.",
+      "text": "각종 사회활동 모임에 즐거이 참여한다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 27,
+      "title": "Q27.",
+      "text": "나는 사람을 볼 때 그 사람이 부지런한지 아닌지를 금방 알아차린다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 28,
+      "title": "Q28.",
+      "text": "항상 급하게 서두루는 편이다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 29,
+      "title": "Q29.",
+      "text": "처음에 남앞에 잘 나서지 못한다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 30,
+      "title": "Q30.",
+      "text": "평소 소심하여 항상 불안한 편이다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 31,
+      "title": "Q31.",
+      "text": "평소에 신경이 예민한 편이다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 32,
+      "title": "Q32.",
+      "text": "인내심이 많다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 33,
+      "title": "Q33.",
+      "text": "행동이 경솔한 편이다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 34,
+      "title": "Q34.",
+      "text": "별일이 아닌데도 조바심치며 불안해한다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 35,
+      "title": "Q35.",
+      "text": "남성적인 면이 많고 여성적인 면이 적다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 36,
+      "title": "Q36.",
+      "text": "별것 아닌 사소한 일 때문에 짜증을 내곤 한다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 37,
+      "title": "Q37.",
+      "text": "앞에 나가서 말을 하거나 발표하는 것이 어렵다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 38,
+      "title": "Q38.",
+      "text": "평소에는 명량하지만 감정의 기복이 심한 편이다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 39,
+      "title": "Q39.",
+      "text": "마음이 상했더라도 괜찮은 척 한다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 40,
+      "title": "Q40.",
+      "text": "업신여김을 당하면 화가 나서 주체할 수 없다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 41,
+      "title": "Q41.",
+      "text": "내 생각이 옳다고 확신되기까지는 함부로 말하지 않는다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 42,
+      "title": "Q42.",
+      "text": "아는 척 하거나 과시하는 경우가 많다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 43,
+      "title": "Q43.",
+      "text": "자신에게는 소흘히하고 남에게는 깍듯이 대하다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 44,
+      "title": "Q44.",
+      "text": "남앞에 잘 나서지 못한다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 45,
+      "title": "Q45.",
+      "text": "남을 의식하지 않고 내 멋대로 하는 편이다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 46,
+      "title": "Q46.",
+      "text": "소심하여 항상 불안한 편이다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 47,
+      "title": "Q47.",
+      "text": "여성적인 면이 많고 남성적인 면이 적다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 48,
+      "title": "Q48.",
+      "text": "웬만한 일을 성취하였어도 부족함을 느낄 때가 많다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 49,
+      "title": "Q49.",
+      "text": "이유없이 토하거나 음식을 삼키기가 어려운 적이 있었다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 50,
+      "title": "Q50.",
+      "text": "몸이 안 좋을 때 땀을 내면 개운하다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 51,
+      "title": "Q51.",
+      "text": "몸이 안 좋으면 소화가 잘 되지 않는다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 52,
+      "title": "Q52.",
+      "text": "평소에 기운이 없어 한숨을 내쉬는 경우가 자주 있다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 53,
+      "title": "Q53.",
+      "text": "온몸과 다리가 힘이 빠져 움직이기가 어려운 증상을 경험한 적이 있다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 54,
+      "title": "Q54.",
+      "text": "음식을 먹은 후 가슴과 배가 더부룩한 증상이 자주 있다.",
+      "options": [
+        {
+          "id": "A",
+          "label": "YES",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "무슨 일이든지 물러서지 않고 밀고 나간다."
+          },
+          "scores": {}
+        },
+        {
+          "id": "B",
+          "label": "NO",
+          "desc": [],
+          "image": {
+            "src": "",
+            "alt": "일을 벌려 놓기만 하지 마무리를 잘 하지 못한다."
+          },
+          "scores": {}
         }
       ],
       "required": true

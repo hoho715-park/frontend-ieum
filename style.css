@@ -182,3 +182,92 @@ body.qscc-info-page {
 /* 어떤 곳에서도 잘리지 않도록 보정 (중요) */
 .qscc-questions img { object-fit: contain; }  /* 자르지 않고 축소/확대만 */
 
+
+/* ===== 테스트 본문 ===== */
+/* 헤더로부터 정확히 120px 아래에서 시작 */
+.qscc-test .wrap {
+  width: 1040px;
+  margin: 120px auto 0;   /* ← auto로 가운데 */
+}
+
+.q-card { 
+  background: #fff; border-radius: 24px; box-shadow: 0 4px 16px rgba(0,0,0,.06);
+  padding: 24px;
+  margin: 0 auto;         /* ← 가운데 */
+}
+.q-title { font-size: 26px; font-weight: 800; margin: 0 0 8px; }
+.q-text  { font-size: 48px; font-weight: 700; margin: 0 0 24px; line-height: 1.25; text-align: left; }
+.q-title, .q-text {
+  text-align: center;     /* ← 좌측 쏠림 방지 */
+}
+
+/* ===== 옵션 카드: 정확히 190 x 453 ===== */
+/* 옵션 그리드 — 열 개수를 CSS 변수로 받고 항상 중앙정렬 */
+.opts-grid{
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 3), 190px); /* ← 열 수 동적 */
+  gap: 24px;
+  width: 100%;
+  justify-content: center;  /* 트랙(열) 자체를 가운데 */
+  justify-items: center;    /* 각 아이템도 셀 안에서 가운데 */
+  margin: 0 auto;
+}
+
+.opt-card{
+  width:190px;height:453px;border-radius:8px;background:#d2ccee;
+  padding:0;cursor:pointer;border:2px solid transparent;
+  transition:border-color .15s,transform .15s;
+  display:flex;flex-direction:column;align-items:stretch; /* ← 내부 꽉 채움 */
+}
+.opt-card:hover{transform:translateY(-2px)}
+.opt-card.selected{border-color:#B2B0E8}
+
+/* 일러스트 영역(상단 채움) */
+.opt-img{width:100%;height:260px;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;border-top-left-radius:8px;border-top-right-radius:8px}
+.opt-img img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* 하단 라벨 (a./b./c. + 텍스트) */
+.opt-meta{display:flex;flex-direction:column;align-items:center;gap:2px;padding-top:6px}
+.opt-mark{font-size:16px;font-weight:700}
+.opt-title{font-size:24px;font-weight:800;line-height:1.1;text-align:center}
+/* 설명문구: 최대 120px 정도만 보여주고 스크롤(고정 높이 카드 유지) */
+.opt-desc{
+  margin:8px 10px 0; padding-top:8px; border-top:2px solid rgba(0,0,0,.08);
+  list-style:none; font-size:14px; line-height:1.35; color:#222;
+  max-height:120px; overflow:auto;
+}
+.opt-desc li{margin:6px 0}
+
+/* 중앙 정렬(이미 적용돼 있어도 안전핀) */
+.opts-grid{width:max-content;margin:0 auto;justify-content:center}
+.q-title,.q-text{text-align:center}
+
+/* ===== 네비/진행도 ===== */
+.nav { 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
+}
+.btn { min-width: 160px; height: 56px; border-radius: 14px; border: 0; font-size: 18px; cursor: pointer; }
+.nav .btn-prev,
+.nav .btn-next {
+  display: none !important;
+}
+
+/* 원형 진행도 */
+.pager { display: flex; align-items: center; gap: 10px; justify-content: center; }
+.page-arrow { width: 36px; height: 36px; border-radius: 50%; border: none; font-weight: 700; background: #E7E6E6; cursor: pointer; }
+.page-arrow:disabled { opacity: .4; cursor: default; }
+
+.page-dot { width: 32px; height: 32px; border-radius: 50%; border: none; display: flex; align-items: center; justify-content: center; font-size: 14px; cursor: pointer; user-select: none; }
+.dot-current { background: #EDA35A; color: #fff; } /* 현재 */
+.dot-done    { background: #B2B0E8; color: #fff; } /* 완료 */
+.dot-todo    { background: #E7E6E6; color: #666; } /* 미완료 */
+
+/* ===== 결과 ===== */
+.result-title { font-size: 40px; font-weight: 800; margin: 0 0 12px; }
+.result-desc  { font-size: 18px; color: #555; }
+
+
