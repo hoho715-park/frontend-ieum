@@ -117,7 +117,11 @@ body {
   text-decoration: none;
   font-size: 50px;           /* 버튼 텍스트 50px */
   color: #000;
-  font-weight: 700;
+
+  /*구글 폰트 설정*/
+  font-family: "Jua", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 /* 하단 서브 카피: 버튼 하단 22px, 중앙 정렬 */
