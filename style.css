@@ -206,7 +206,7 @@ body.qscc-info-page {
   margin: 0 auto;         /* ← 가운데 */
 }
 .q-title { font-size: 26px; font-weight: 800; margin: 0 0 8px; }
-.q-text  { font-size: 48px; font-weight: 700; margin: 0 0 24px; line-height: 1.25; text-align: left; }
+.q-text  { font-size: 40px; font-weight: 700; margin: 0 0 24px; line-height: 1.25; text-align: left; }
 .q-title, .q-text {
   text-align: center;     /* ← 좌측 쏠림 방지 */
 }
