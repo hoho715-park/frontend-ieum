@@ -1,7 +1,7 @@
 (async function () {
   // ① 경로 자동 계산(현재 test.html 기준 상대경로)
   const BASE = location.pathname.replace(/\/[^/]*$/, ""); // /.../test.html -> /.../
-  const DATA_URL = `${BASE}/data/qsccII.json`; // /.../data/qsccii.json
+  const DATA_URL = `${BASE}/data/qsccII.json`; // /.../data/qsccII.json
   const STORAGE_KEY = "qsccii_v1";
 
   // ② 로드 실패 대비 샘플(2문항) — 실제에선 qsccii.json 사용
@@ -43,6 +43,12 @@
   const pager  = document.getElementById("pager");
   const result = document.getElementById("result");
 
+  // ===== 초기화(기록 삭제) 함수 =====
+  function clearProgressStorage() {
+    try { localStorage.removeItem(STORAGE_KEY); } catch {}
+    state.answers = {};
+  }
+
   // 데이터 로드(에러 안전)
   try {
     const res = await fetch(DATA_URL, { cache: "no-cache" });
@@ -70,9 +76,9 @@
 
   // 옵션(190×453)
   function renderOptions(q){
-    const cols = (q.options || []).length || 1;
-    optsEl.style.setProperty('--cols', cols);  // 보기 개수(2/3/4)에 맞춰 열 수 전달
-    optsEl.innerHTML = "";
+  const cols = (q.options || []).length || 1;
+  optsEl.style.setProperty('--cols', cols);  // 보기 개수(2/3/4)에 맞춰 열 수 전달
+  optsEl.innerHTML = "";
 
   (q.options || []).forEach((opt, i) => {
     const card = document.createElement("div");
@@ -110,13 +116,24 @@
       descWrap.appendChild(li);
     });
 
-    // 선택 처리
+    // === 선택 처리: 저장 → 진행도 갱신 → 자동 다음 ===
     card.addEventListener("click", () => {
       state.answers[q.id] = opt.id;
       [...optsEl.children].forEach(c => c.classList.remove("selected"));
       card.classList.add("selected");
-      save();
-      renderPager();      // 진행도 즉시 갱신
+      save();         // 선택 저장
+      renderPager();  // 하단 원 색 즉시 반영
+
+      // ★ 자동 다음(마지막이면 결과로)
+      setTimeout(() => {
+        if (state.idx < total() - 1) {
+          state.idx++;
+          setHash();
+          renderQuestion();
+        } else {
+          renderResult();
+        }
+      }, 120); // 살짝 딜레이로 선택 강조 효과 보장
     });
 
     // 조립
@@ -126,7 +143,6 @@
     optsEl.appendChild(card);
   });
 }
-
 
   // 진행도 점
   function renderPager() {
@@ -186,10 +202,22 @@
       <div class="result-title">당신의 체질: ${winner || "-"}</div>
       <div class="result-desc">${breakdown}</div>
       <div style="display:flex;gap:12px;justify-content:center;margin-top:16px">
-        <a class="btn btn-prev" href="./test.html#q=1" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">처음부터 다시</a>
-        <a class="btn btn-next" href="./whatisqscc.html" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">설명 다시 보기</a>
+        <a class="btn btn-prev" href="./test.html#q=1" data-reset="true" id="restartBtn" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">처음부터 다시</a>
+        <a class="btn btn-next" href="./whatisqscc.html" data-reset="true" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">설명 다시 보기</a>
       </div>
     `;
+
+    // "처음부터 다시"는 페이지 내에서 초기화 후 1번으로 이동
+    const restartBtn = document.getElementById("restartBtn");
+    if (restartBtn) {
+      restartBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        clearProgressStorage();
+        state.idx = 0;
+        setHash();
+        renderQuestion();
+      });
+    }
   }
 
   function renderQuestion() {
@@ -214,6 +242,22 @@
   prev.addEventListener("click", () => { if (state.idx > 0) { state.idx--; setHash(); renderQuestion(); } });
   next.addEventListener("click", () => { if (state.idx < total() - 1) { state.idx++; setHash(); renderQuestion(); } else { renderResult(); } });
   window.addEventListener("hashchange", () => { state.idx = parseHash(); renderQuestion(); });
+
+  // ===== 전역: 로고/메인 링크/리셋 링크 클릭 시 기록 삭제 =====
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("a");
+    if (!a) return;
+    const href = a.getAttribute("href") || "";
+    const isLogo = a.classList.contains("logo");
+    const toMain = /(^|\/)index\.html(?:$|[?#])/.test(href);
+    const isReset = a.dataset && a.dataset.reset === "true";
+
+    if (isLogo || toMain || isReset) {
+      clearProgressStorage();
+      // data-reset=true 이면서 test.html로 가는 경우는 위에서 별도 처리(restartBtn)
+      // 메인으로 이동하는 경우는 기본 네비게이션 진행(초기화만 수행)
+    }
+  });
 
   // 시작
   state.idx = parseHash();
