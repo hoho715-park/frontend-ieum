@@ -310,43 +310,60 @@ card.addEventListener("click", () => {
   }
 
   // 진행도 점
-  function renderPager() {
-    const tot = total();
-    const cur = state.idx + 1;
-    const group = Math.floor((cur - 1) / 10);
-    const start = group * 10 + 1;
-    const end   = Math.min(start + 9, tot);
+  // 진행도 점 (10문항씩 페이징)
+function renderPager() {
+  const tot = total();
+  const cur = state.idx + 1;
 
-    pager.innerHTML = "";
+  // 현재 문항이 속한 10개 묶음 계산
+  const group = Math.floor((cur - 1) / 10);
+  const start = group * 10 + 1;              // 이 묶음의 시작 번호 (1, 11, 21, …)
+  const end   = Math.min(start + 9, tot);    // 이 묶음의 끝 번호
 
-    const prevB = document.createElement("button");
-    prevB.className = "page-arrow"; prevB.textContent = "‹";
-    prevB.disabled = cur === 1;
-    prevB.onclick = () => { if (state.idx > 0) { state.idx--; setHash(); renderQuestion(); } };
-    pager.appendChild(prevB);
+  pager.innerHTML = "";
 
-    for (let n = start; n <= end; n++) {
-      const b = document.createElement("button");
-      const isCurrent = (n === cur);
-      const isDone = !!state.answers[n]; // 답변이 있으면 완료로 간주
-      b.className = "page-dot " + (isCurrent ? "dot-current" : isDone ? "dot-done" : "dot-todo");
-      b.textContent = String(n);
-      b.onclick = () => { state.idx = n - 1; setHash(); renderQuestion(); };
-      pager.appendChild(b);
+  // ◀ 이전 묶음
+  const prevB = document.createElement("button");
+  prevB.className = "page-arrow";
+  prevB.textContent = "‹";
+  prevB.disabled = start <= 1;               // 첫 묶음이면 비활성
+  prevB.onclick = () => {
+    if (start > 1) {
+      const newStart = start - 10;           // 이전 묶음의 시작 번호
+      state.idx = newStart - 1;              // 해당 묶음의 첫 문제로 이동
+      setHash();
+      renderQuestion();
     }
+  };
+  pager.appendChild(prevB);
 
-    const nextB = document.createElement("button");
-    nextB.className = "page-arrow"; nextB.textContent = "›";
-    nextB.disabled = cur === tot;
-    nextB.onclick = () => { 
-      if (state.idx < tot - 1) { 
-        state.idx++; setHash(); renderQuestion(); 
-      } else { 
-        tryShowResult(); 
-      } 
-    };
-    pager.appendChild(nextB);
+  // ● 10개 점(해당 묶음 번호)
+  for (let n = start; n <= end; n++) {
+    const b = document.createElement("button");
+    const isCurrent = (n === cur);
+    const isDone = !!state.answers[n];
+    b.className = "page-dot " + (isCurrent ? "dot-current" : isDone ? "dot-done" : "dot-todo");
+    b.textContent = String(n);
+    b.onclick = () => { state.idx = n - 1; setHash(); renderQuestion(); };
+    pager.appendChild(b);
   }
+
+  // ▶ 다음 묶음
+  const nextB = document.createElement("button");
+  nextB.className = "page-arrow";
+  nextB.textContent = "›";
+  nextB.disabled = end >= tot;               // 마지막 묶음이면 비활성
+  nextB.onclick = () => {
+    if (end < tot) {
+      const newStart = start + 10;           // 다음 묶음의 시작 번호(11, 21, …)
+      state.idx = newStart - 1;              // 그 묶음의 첫 문제로 이동
+      setHash();
+      renderQuestion();
+    }
+  };
+  pager.appendChild(nextB);
+}
+
 
   // ===== 결과 계산(최다 득점 + 백분율) =====
   function computeResult() {
