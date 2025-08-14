@@ -3,6 +3,13 @@
   const BASE = location.pathname.replace(/\/[^/]*$/, ""); // /.../test.html -> /.../
   const DATA_URL = `${BASE}/data/qsccII.json`;            // /.../data/qsccII.json
   const STORAGE_KEY = "qsccii_v1";
+  // 체질별 포인트 컬러
+  const TYPE_COLOR = {
+    "태양인": "#FF7C9C",
+    "소양인": "#F6D372",
+    "태음인": "#66B4F1",
+    "소음인": "#67D2C6"
+    };
 
   // ② 로드 실패 대비 샘플(2문항)
   const FALLBACK = {
@@ -454,36 +461,40 @@ function donutChart(percentages) {
 }
 
   // ===== 결과 표시 =====
-  function renderResult() {
+function renderResult() {
   const { winner, totals, percentages } = computeResult();
 
-  // 텍스트 라인(원하면 유지)
   const types  = state.data.types || [];
   const sorted = [...types].sort((a, b) => (percentages[b] || 0) - (percentages[a] || 0));
   const pctLine = sorted.map(t => `${t}: ${percentages[t]}%`).join(" · ");
 
-  // ✅ 도넛 차트 HTML 생성
+  // 도넛 차트 (네가 이미 추가한 함수 그대로 사용)
   const chart = donutChart(percentages);
+
+  // ★ 체질명에 색 입히기
+  const color = TYPE_COLOR[winner] || "#111";
+  const winnerHTML = winner
+    ? `<span style="color:${color}; font-weight:900;">“${winner}”</span>`
+    : `“-”`;
 
   qcard.hidden = true; 
   result.hidden = false;
   result.innerHTML = `
     <div class="result-title" style="text-align:center">
-      당신은 <strong style="color:#8AA624">"${winner || "-"}"</strong> 입니다.
+      당신은 ${winnerHTML} 입니다.
     </div>
     <div class="result-desc" style="text-align:center">${pctLine}</div>
 
-    ${chart}  <!-- 도넛 차트가 이 위치에 렌더됩니다 -->
+    ${chart}
 
     <div style="display:flex;gap:12px;justify-content:center;margin-top:16px">
       <a class="btn btn-prev" href="./test.html#q=1" data-reset="true" id="restartBtn"
          style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">처음부터 다시</a>
       <a class="btn btn-next" href="./whatisqscc.html" data-reset="true"
-         style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">솔루션 보기</a>
+         style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">설명 다시 보기</a>
     </div>
   `;
 
-  // “처음부터 다시” 동작 유지
   const restartBtn = document.getElementById("restartBtn");
   if (restartBtn) {
     restartBtn.addEventListener("click", (e) => {
@@ -495,6 +506,7 @@ function donutChart(percentages) {
     });
   }
 }
+
 
 
   // 문항 렌더
