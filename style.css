@@ -103,7 +103,7 @@ body {
   margin-top: 40px;  /* 헤더와 이미지 사이 여백 – 필요 시 조정 */
 }
 .main-image {
-  width: 987px;
+  width: 900px;
   height: 554px;
   object-fit: cover;
   border-radius: 40px;
@@ -281,3 +281,18 @@ body.qscc-info-page {
 .result-desc  { font-size: 18px; color: #555; }
 
 
+/* === 테스트 화면 텍스트 전용 폰트 적용 === */
+/* test.html 안의 문제/선지/설명/진행도/결과 전체에 적용 */
+.qscc-test, .qscc-test * {
+  font-family: "Do Hyeon", sans-serif;
+  font-weight: 400;
+  font-style: normal
+}
+
+/* JS로 생성되는 팝업(미응답/완료)도 같은 폰트 */
+#ua-overlay, #ua-overlay *,
+#done-overlay, #done-overlay * {
+  font-family: "Do Hyeon", sans-serif;
+  font-weight: 400;
+  font-style: normal
+}
