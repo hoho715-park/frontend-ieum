@@ -93,6 +93,105 @@
     }));
   }
 
+  // ===== 미응답 검사 → 결과 전환 제어 =====
+  function getUnansweredList() {
+    const arr = [];
+    (state.data.questions || []).forEach((q, i) => {
+      const id = (typeof q.id === "number" || typeof q.id === "string") ? q.id : (i + 1);
+      if (!state.answers[q.id]) arr.push(Number(id));
+    });
+    return arr.sort((a, b) => a - b);
+  }
+
+  function showUnansweredModal(missing) {
+    // 기존 오버레이 제거
+    const old = document.getElementById("ua-overlay");
+    if (old) old.remove();
+
+    const overlay = document.createElement("div");
+    overlay.id = "ua-overlay";
+    overlay.style.cssText = `
+      position:fixed; inset:0; background:rgba(0,0,0,.30);
+      display:flex; align-items:center; justify-content:center; z-index:9999;
+    `;
+
+    const modal = document.createElement("div");
+    modal.style.cssText = `
+      width:836px; height:463px; border-radius:52px; background:#A294F9;
+      box-shadow:0 10px 40px rgba(0,0,0,.25);
+      position:relative; padding:32px;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      text-align:center;
+    `;
+
+    // 닫기 버튼
+    const close = document.createElement("button");
+    close.textContent = "✕";
+    close.setAttribute("aria-label","닫기");
+    close.style.cssText = `
+      position:absolute; top:18px; right:22px; border:none; background:transparent;
+      font-size:24px; cursor:pointer; line-height:1;
+    `;
+    close.onclick = () => overlay.remove();
+
+    // 경고 아이콘
+    const icon = document.createElement("div");
+    icon.textContent = "⚠️";
+    icon.style.cssText = "font-size:48px; margin-bottom:8px;";
+
+    // 미응답 문항 번호 리스트(클릭 이동)
+    const listWrap = document.createElement("div");
+    listWrap.style.cssText = "margin:8px 0 6px;";
+
+    const nums = document.createElement("div");
+    nums.style.cssText = `
+      display:flex; flex-wrap:wrap; gap:12px; justify-content:center; align-items:center;
+      font-weight:800; font-size:22px; color:#D7263D;
+    `;
+    missing.forEach(n => {
+      const btn = document.createElement("button");
+      btn.textContent = `${n}번`;
+      btn.style.cssText = `
+        background:transparent; border:none; cursor:pointer;
+        color:#D7263D; text-decoration:underline; font-weight:800; font-size:22px;
+      `;
+      btn.onclick = () => {
+        overlay.remove();
+        state.idx = Number(n) - 1;
+        setHash();
+        renderQuestion();
+      };
+      nums.appendChild(btn);
+    });
+
+    const line1 = document.createElement("div");
+    line1.textContent = "문제를 답변하지 않았습니다.";
+    line1.style.cssText = "font-weight:800; font-size:20px; color:#000; margin-top:10px;";
+
+    const line2 = document.createElement("div");
+    line2.textContent = "답변해주셔야 결과가 제공됩니다.";
+    line2.style.cssText = "font-weight:800; font-size:20px; color:#000; margin-top:6px;";
+
+    listWrap.appendChild(nums);
+    modal.appendChild(close);
+    modal.appendChild(icon);
+    modal.appendChild(listWrap);
+    modal.appendChild(line1);
+    modal.appendChild(line2);
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+  }
+
+  function tryShowResult() {
+    const missing = getUnansweredList();
+    if (missing.length > 0) {
+      showUnansweredModal(missing);
+      return false;
+    }
+    renderResult();
+    return true;
+  }
+
   // 옵션(카드 190×453)
   function renderOptions(q){
     const cols = (q.options || []).length || 1;
@@ -143,14 +242,14 @@
         save();         // 선택 저장(누적 점수 포함)
         renderPager();  // 진행도 색 즉시 반영
 
-        // 자동 다음(마지막이면 결과로)
+        // 자동 다음(마지막이면 결과/검증)
         setTimeout(() => {
           if (state.idx < total() - 1) {
             state.idx++;
             setHash();
             renderQuestion();
           } else {
-            renderResult();
+            tryShowResult();
           }
         }, 120);
       });
@@ -192,7 +291,13 @@
     const nextB = document.createElement("button");
     nextB.className = "page-arrow"; nextB.textContent = "›";
     nextB.disabled = cur === tot;
-    nextB.onclick = () => { if (state.idx < tot - 1) { state.idx++; setHash(); renderQuestion(); } };
+    nextB.onclick = () => { 
+      if (state.idx < tot - 1) { 
+        state.idx++; setHash(); renderQuestion(); 
+      } else { 
+        tryShowResult(); 
+      } 
+    };
     pager.appendChild(nextB);
   }
 
@@ -286,8 +391,16 @@
     next.disabled = !state.answers[q.id];
   }
 
-  prev.addEventListener("click", () => { if (state.idx > 0) { state.idx--; setHash(); renderQuestion(); } });
-  next.addEventListener("click", () => { if (state.idx < total() - 1) { state.idx++; setHash(); renderQuestion(); } else { renderResult(); } });
+  prev.addEventListener("click", () => { 
+    if (state.idx > 0) { state.idx--; setHash(); renderQuestion(); } 
+  });
+  next.addEventListener("click", () => { 
+    if (state.idx < total() - 1) { 
+      state.idx++; setHash(); renderQuestion(); 
+    } else { 
+      tryShowResult(); 
+    } 
+  });
   window.addEventListener("hashchange", () => { state.idx = parseHash(); renderQuestion(); });
 
   // ===== 전역: 로고/메인/리셋 링크 클릭 시 기록 삭제 =====
