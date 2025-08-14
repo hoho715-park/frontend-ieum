@@ -1,0 +1,68 @@
+{
+  "version": "1.1",
+  "title": "QSCC-II",
+  "types": ["태양인","태음인","소양인","소음인"],
+  "scoring": { "method": "sum", "tieBreaker": ["태양인","태음인","소양인","소음인"] },
+  "questions": [
+    {
+      "id": 1,
+      "title": "Q1.",
+      "text": "당신의 체격은 어떻습니까?",
+      "layout": { "columns": 3, "imageAspect": "3:5" },
+      "options": [
+        {
+          "id": "A",
+          "label": "큰 편이다",
+          "desc": "어깨·흉곽이 발달했고 체중 변화가 비교적 적다.",
+          "image": { "src": "/public/images/test/q1_A.png", "alt": "큰 체격 실루엣" },
+          "scores": { "태양인":2, "태음인":2, "소양인":0, "소음인":0 }
+        },
+        {
+          "id": "B",
+          "label": "보통이다",
+          "desc": "평균적인 체격, 과체중·저체중 모두 아님.",
+          "image": { "src": "/public/images/test/q1_B.png", "alt": "보통 체격 실루엣" },
+          "scores": { "태양인":1, "태음인":1, "소양인":1, "소음인":1 }
+        },
+        {
+          "id": "C",
+          "label": "작은 편이다",
+          "desc": "전체적으로 마른 체형, 체중 변동이 있는 편.",
+          "image": { "src": "/public/images/test/q1_C.png", "alt": "작은 체격 실루엣" },
+          "scores": { "태양인":0, "태음인":0, "소양인":2, "소음인":2 }
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": 2,
+      "title": "Q2.",
+      "text": "당신의 체형은 어떻습니까?",
+      "layout": { "columns": 3, "imageAspect": "3:5" },
+      "options": [
+        {
+          "id": "A",
+          "label": "뚱뚱한 편이다",
+          "desc": "복부·허리둘레가 두드러진다.",
+          "image": { "src": "/public/images/test/q2_A.png", "alt": "비만형 실루엣" },
+          "scores": { "태음인":2 }
+        },
+        {
+          "id": "B",
+          "label": "보통이다",
+          "desc": "정상 체지방 범주.",
+          "image": { "src": "/public/images/test/q2_B.png", "alt": "보통형 실루엣" },
+          "scores": { "소양인":1, "소음인":1 }
+        },
+        {
+          "id": "C",
+          "label": "마른 편이다",
+          "desc": "피하지방이 적고 근육량도 적은 편.",
+          "image": { "src": "/public/images/test/q2_C.png", "alt": "마른형 실루엣" },
+          "scores": { "소양인":2, "소음인":2 }
+        }
+      ],
+      "required": true
+    }
+  ]
+}
