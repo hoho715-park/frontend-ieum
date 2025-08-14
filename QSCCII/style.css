@@ -128,3 +128,57 @@ body {
   line-height: 1;
   text-align: center;
 }
+
+
+body.qscc-info-page {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;   /* 상단 기준 */
+  overflow-y: auto;
+}
+
+/* 전체 프레임 */
+.qscc-info {
+  width: 1440px;
+  min-height: 1024px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: visible;
+}
+
+/* [공통 헤더] — 메인과 동일 */
+.qscc-header { width: 1354px; height: 60px; margin-top: 65px; }
+.header-inner {
+  width: 100%; height: 100%;
+  display: grid;
+  grid-template-columns: 121px 166px max-content 238px 50px;
+  align-items: center;
+}
+.logo { width: 121px; height: 60px; display: inline-flex; align-items: center; }
+.logo img { width: 121px; height: 60px; object-fit: contain; display: block; }
+.gap-166 { width: 166px; height: 1px; }
+.gap-238 { width: 238px; height: 1px; }
+.gnb ul { margin: 0; padding: 0; list-style: none; display: inline-flex; gap: 100px; font-size: 24px; }
+.gnb a { text-decoration: none; color: #000; line-height: 1; }
+.profile { width: 50px; height: 50px; padding: 0; border: 0; background: transparent; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+.profile img { width: 50px; height: 50px; border-radius: 50%; display: block; }
+
+/* 제목 이미지: 566x75 중앙 고정 */
+.qscc-title {
+  width: 566px; height: 75px;
+  margin: 85px auto 0;     /* 좌우 중앙 + 상단 간격 */
+  display: block;
+}
+
+/* 질문 이미지들(정확 크기 + 정확 간격) */
+.qscc-questions { width: 100%; display: flex; flex-direction: column; align-items: center; }
+
+.q1 { width: 608px; height: 380px; margin-top: 81px; display: block; }
+.q2 { width: 620px; height: 390px; margin-top: 56px; display: block; }
+.q3 { width: 626px; height: 385px; margin-top: 45px; display: block; margin-bottom: 80px; }
+
+/* 어떤 곳에서도 잘리지 않도록 보정 (중요) */
+.qscc-questions img { object-fit: contain; }  /* 자르지 않고 축소/확대만 */
+
