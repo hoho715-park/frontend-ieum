@@ -139,7 +139,7 @@
 
     const modal = document.createElement("div");
     modal.style.cssText = `
-      width:836px; height:463px; border-radius:52px; background:#A294F9;
+      width:836px; height:463px; border-radius:52px; background:#B2B0E8;
       box-shadow:0 10px 40px rgba(0,0,0,.25);
       position:relative; padding:32px;
       display:flex; flex-direction:column; align-items:center; justify-content:center;
@@ -173,11 +173,11 @@
 
     const line1 = document.createElement("div");
     line1.textContent = "문제를 답변하지 않았습니다.";
-    line1.style.cssText = "font-weight:800; font-size:20px; color:#000;";
+    line1.style.cssText = "font-weight:800; font-size:35px; color:#000;";
 
     const line2 = document.createElement("div");
     line2.textContent = "답변해주셔야 결과가 제공됩니다.";
-    line2.style.cssText = "font-weight:800; font-size:20px; color:#000; margin-top:6px;";
+    line2.style.cssText = "font-weight:800; font-size:35px; color:#000; margin-top:6px;";
 
     modal.appendChild(makeClose(() => overlay.remove()));
     modal.appendChild(icon);
@@ -194,7 +194,7 @@
 
     const modal = document.createElement("div");
     modal.style.cssText = `
-      width:836px; height:463px; border-radius:52px; background:#A294F9;
+      width:836px; height:463px; border-radius:52px; background:#B2B0E8;
       box-shadow:0 10px 40px rgba(0,0,0,.25);
       position:relative; padding:32px;
       display:flex; flex-direction:column; align-items:center; justify-content:center;
@@ -212,7 +212,7 @@
     const btn = document.createElement("button");
     btn.textContent = "결과보기";
     btn.style.cssText = `
-      width:436px; height:99px; border-radius:49.5px; background:#7ADAA5;
+      width:436px; height:99px; border-radius:49.5px; background:#FEFFC4;
       border:none; cursor:pointer; margin-top:28px;
       font-size:32px; font-weight:900; color:#000;
       display:inline-flex; align-items:center; justify-content:center;
@@ -483,7 +483,6 @@ function renderResult() {
     <div class="result-title" style="text-align:center">
       당신은 ${winnerHTML} 입니다.
     </div>
-    <div class="result-desc" style="text-align:center">${pctLine}</div>
 
     ${chart}
 
@@ -491,7 +490,7 @@ function renderResult() {
       <a class="btn btn-prev" href="./test.html#q=1" data-reset="true" id="restartBtn"
          style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">처음부터 다시</a>
       <a class="btn btn-next" href="./whatisqscc.html" data-reset="true"
-         style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">설명 다시 보기</a>
+         style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">솔루션 보기</a>
     </div>
   `;
 

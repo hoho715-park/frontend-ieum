@@ -240,7 +240,7 @@ body.qscc-info-page {
 /* 하단 라벨 (a./b./c. + 텍스트) */
 .opt-meta{display:flex;flex-direction:column;align-items:center;gap:2px;padding-top:6px}
 .opt-mark{font-size:16px;font-weight:700}
-.opt-title{font-size:24px;font-weight:800;line-height:1.1;text-align:center}
+.opt-title{font-size:13px;font-weight:800;line-height:1.1;text-align:center}
 /* 설명문구: 최대 120px 정도만 보여주고 스크롤(고정 높이 카드 유지) */
 .opt-desc{
   margin:8px 10px 0; padding-top:8px; border-top:2px solid rgba(0,0,0,.08);
@@ -273,7 +273,7 @@ body.qscc-info-page {
 
 .page-dot { width: 32px; height: 32px; border-radius: 50%; border: none; display: flex; align-items: center; justify-content: center; font-size: 14px; cursor: pointer; user-select: none; }
 .dot-current { background: #EDA35A; color: #fff; } /* 현재 */
-.dot-done    { background: #B2B0E8; color: #fff; } /* 완료 */
+.dot-done    { background: #59a288; color: #fff; } /* 완료 */
 .dot-todo    { background: #E7E6E6; color: #666; } /* 미완료 */
 
 /* ===== 결과 ===== */
