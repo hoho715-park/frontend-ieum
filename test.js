@@ -396,43 +396,106 @@ function renderPager() {
     return { winner, totals, percentages };
   }
 
+  // === 결과 퍼센트 도넛 차트(SVG) ===
+function donutChart(percentages) {
+  // 표시 순서와 색
+  const ORDER  = ["소음인", "태음인", "소양인", "태양인"];
+  const COLOR  = {
+    "소음인": "#67D2C6",  // teal
+    "태음인": "#66B4F1",  // blue
+    "소양인": "#F6D372",  // yellow
+    "태양인": "#FF7C9C"   // pink
+  };
+
+  // 원형 파라미터
+  const SIZE = 220;
+  const R    = 80;
+  const SW   = 28;
+  const CX   = SIZE/2, CY = SIZE/2;
+  const CIRC = 2*Math.PI*R;
+
+  // 각 체질의 호 그리기
+  let offset = 0;
+  const arcs = ORDER.map(t => {
+    const pct = Math.max(0, percentages[t] || 0);
+    const len = (pct/100) * CIRC;
+    const circle = `
+      <circle r="${R}" cx="${CX}" cy="${CY}" fill="transparent"
+              stroke="${COLOR[t]}" stroke-width="${SW}"
+              stroke-dasharray="${len} ${CIRC}"
+              stroke-dashoffset="${-offset}"
+              stroke-linecap="butt"
+              transform="rotate(-90 ${CX} ${CY})"></circle>`;
+    offset += len;
+    return circle;
+  }).join("");
+
+  // 가운데 구멍(도넛)
+  const hole = `<circle r="${R - SW/2 - 2}" cx="${CX}" cy="${CY}" fill="#fff"></circle>`;
+
+  // 범례
+  const legend = ORDER.map(t => `
+    <div style="display:flex;align-items:center;gap:10px;margin:6px 14px;">
+      <span style="width:32px;height:12px;border-radius:6px;background:${COLOR[t]}"></span>
+      <span style="font-weight:700">${t}</span>
+      <span style="opacity:.8">&nbsp;${(percentages[t]||0)}%</span>
+    </div>
+  `).join("");
+
+  return `
+    <div style="display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:16px">
+      <svg width="${SIZE}" height="${SIZE}" viewBox="0 0 ${SIZE} ${SIZE}">
+        ${arcs}
+        ${hole}
+      </svg>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center">${legend}</div>
+    </div>
+  `;
+}
+
   // ===== 결과 표시 =====
   function renderResult() {
-    const { winner, totals, percentages } = computeResult();
+  const { winner, totals, percentages } = computeResult();
 
-    // 퍼센트 내림차순으로 표시
-    const types = state.data.types || [];
-    const sorted = [...types].sort((a, b) => (percentages[b] || 0) - (percentages[a] || 0));
-    const pctLine = sorted.map(t => `${t}: ${percentages[t]}%`).join(" · ");
+  // 텍스트 라인(원하면 유지)
+  const types  = state.data.types || [];
+  const sorted = [...types].sort((a, b) => (percentages[b] || 0) - (percentages[a] || 0));
+  const pctLine = sorted.map(t => `${t}: ${percentages[t]}%`).join(" · ");
 
-    qcard.hidden = true; result.hidden = false;
-    result.innerHTML = `
-      <div class="result-title" style="text-align:center">
-        당신은 "<strong>${winner || "-"}</strong>" 입니다.
-      </div>
-      <div class="result-desc" style="text-align:center">
-        ${pctLine}
-      </div>
-      <div style="display:flex;gap:12px;justify-content:center;margin-top:16px">
-        <a class="btn btn-prev" href="./test.html#q=1" data-reset="true" id="restartBtn"
-           style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">처음부터 다시</a>
-        <a class="btn btn-next" href="./whatisqscc.html" data-reset="true"
-           style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">설명 다시 보기</a>
-      </div>
-    `;
+  // ✅ 도넛 차트 HTML 생성
+  const chart = donutChart(percentages);
 
-    // "처음부터 다시"는 페이지 내에서 초기화 후 1번으로 이동
-    const restartBtn = document.getElementById("restartBtn");
-    if (restartBtn) {
-      restartBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        clearProgressStorage();
-        state.idx = 0;
-        setHash();
-        renderQuestion();
-      });
-    }
+  qcard.hidden = true; 
+  result.hidden = false;
+  result.innerHTML = `
+    <div class="result-title" style="text-align:center">
+      당신은 <strong style="color:#8AA624">"${winner || "-"}"</strong> 입니다.
+    </div>
+    <div class="result-desc" style="text-align:center">${pctLine}</div>
+
+    ${chart}  <!-- 도넛 차트가 이 위치에 렌더됩니다 -->
+
+    <div style="display:flex;gap:12px;justify-content:center;margin-top:16px">
+      <a class="btn btn-prev" href="./test.html#q=1" data-reset="true" id="restartBtn"
+         style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">처음부터 다시</a>
+      <a class="btn btn-next" href="./whatisqscc.html" data-reset="true"
+         style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">솔루션 보기</a>
+    </div>
+  `;
+
+  // “처음부터 다시” 동작 유지
+  const restartBtn = document.getElementById("restartBtn");
+  if (restartBtn) {
+    restartBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      clearProgressStorage();
+      state.idx = 0;
+      setHash();
+      renderQuestion();
+    });
   }
+}
+
 
   // 문항 렌더
   function renderQuestion() {
