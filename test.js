@@ -93,6 +93,30 @@
     }));
   }
 
+  // ===== 팝업 유틸 =====
+  function makeOverlay(id = "overlay") {
+    const old = document.getElementById(id);
+    if (old) old.remove();
+    const overlay = document.createElement("div");
+    overlay.id = id;
+    overlay.style.cssText = `
+      position:fixed; inset:0; background:rgba(0,0,0,.30);
+      display:flex; align-items:center; justify-content:center; z-index:9999;
+    `;
+    return overlay;
+  }
+  function makeClose(onclick) {
+    const close = document.createElement("button");
+    close.textContent = "✕";
+    close.setAttribute("aria-label","닫기");
+    close.style.cssText = `
+      position:absolute; top:18px; right:22px; border:none; background:transparent;
+      font-size:24px; cursor:pointer; line-height:1;
+    `;
+    close.onclick = onclick;
+    return close;
+  }
+
   // ===== 미응답 검사 → 결과 전환 제어 =====
   function getUnansweredList() {
     const arr = [];
@@ -104,16 +128,7 @@
   }
 
   function showUnansweredModal(missing) {
-    // 기존 오버레이 제거
-    const old = document.getElementById("ua-overlay");
-    if (old) old.remove();
-
-    const overlay = document.createElement("div");
-    overlay.id = "ua-overlay";
-    overlay.style.cssText = `
-      position:fixed; inset:0; background:rgba(0,0,0,.30);
-      display:flex; align-items:center; justify-content:center; z-index:9999;
-    `;
+    const overlay = makeOverlay("ua-overlay");
 
     const modal = document.createElement("div");
     modal.style.cssText = `
@@ -124,29 +139,14 @@
       text-align:center;
     `;
 
-    // 닫기 버튼
-    const close = document.createElement("button");
-    close.textContent = "✕";
-    close.setAttribute("aria-label","닫기");
-    close.style.cssText = `
-      position:absolute; top:18px; right:22px; border:none; background:transparent;
-      font-size:24px; cursor:pointer; line-height:1;
-    `;
-    close.onclick = () => overlay.remove();
-
-    // 경고 아이콘
     const icon = document.createElement("div");
     icon.textContent = "⚠️";
     icon.style.cssText = "font-size:48px; margin-bottom:8px;";
 
-    // 미응답 문항 번호 리스트(클릭 이동)
-    const listWrap = document.createElement("div");
-    listWrap.style.cssText = "margin:8px 0 6px;";
-
     const nums = document.createElement("div");
     nums.style.cssText = `
       display:flex; flex-wrap:wrap; gap:12px; justify-content:center; align-items:center;
-      font-weight:800; font-size:22px; color:#D7263D;
+      font-weight:800; font-size:22px; color:#D7263D; margin:6px 0 10px;
     `;
     missing.forEach(n => {
       const btn = document.createElement("button");
@@ -166,18 +166,57 @@
 
     const line1 = document.createElement("div");
     line1.textContent = "문제를 답변하지 않았습니다.";
-    line1.style.cssText = "font-weight:800; font-size:20px; color:#000; margin-top:10px;";
+    line1.style.cssText = "font-weight:800; font-size:20px; color:#000;";
 
     const line2 = document.createElement("div");
     line2.textContent = "답변해주셔야 결과가 제공됩니다.";
     line2.style.cssText = "font-weight:800; font-size:20px; color:#000; margin-top:6px;";
 
-    listWrap.appendChild(nums);
-    modal.appendChild(close);
+    modal.appendChild(makeClose(() => overlay.remove()));
     modal.appendChild(icon);
-    modal.appendChild(listWrap);
+    modal.appendChild(nums);
     modal.appendChild(line1);
     modal.appendChild(line2);
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+  }
+
+  // ✅ 완료 팝업(요청 디자인 반영: 버튼 436×99, r=49.5, #7ADAA5)
+  function showCompleteModal() {
+    const overlay = makeOverlay("done-overlay");
+
+    const modal = document.createElement("div");
+    modal.style.cssText = `
+      width:836px; height:463px; border-radius:52px; background:#A294F9;
+      box-shadow:0 10px 40px rgba(0,0,0,.25);
+      position:relative; padding:32px;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      text-align:center;
+    `;
+
+    const icon = document.createElement("div");
+    icon.textContent = "🎉";
+    icon.style.cssText = "font-size:56px; margin-bottom:16px;";
+
+    const title = document.createElement("div");
+    title.innerHTML = `모든 문제에 답변하셨습니다.<br/>결과를 확인하시겠습니까?`;
+    title.style.cssText = "font-weight:900; font-size:28px; color:#000; line-height:1.4;";
+
+    const btn = document.createElement("button");
+    btn.textContent = "결과보기";
+    btn.style.cssText = `
+      width:436px; height:99px; border-radius:49.5px; background:#7ADAA5;
+      border:none; cursor:pointer; margin-top:28px;
+      font-size:32px; font-weight:900; color:#000;
+      display:inline-flex; align-items:center; justify-content:center;
+      box-shadow:0 8px 16px rgba(0,0,0,.12);
+    `;
+    btn.onclick = () => { overlay.remove(); renderResult(); };
+
+    modal.appendChild(makeClose(() => overlay.remove()));
+    modal.appendChild(icon);
+    modal.appendChild(title);
+    modal.appendChild(btn);
     overlay.appendChild(modal);
     document.body.appendChild(overlay);
   }
@@ -188,7 +227,8 @@
       showUnansweredModal(missing);
       return false;
     }
-    renderResult();
+    // 모든 문항이 응답되었으면 완료 팝업 먼저 노출
+    showCompleteModal();
     return true;
   }
 
@@ -235,24 +275,31 @@
       });
 
       // === 선택 처리: 저장 → 진행도 갱신 → 자동 다음 ===
-      card.addEventListener("click", () => {
-        state.answers[q.id] = opt.id;
-        [...optsEl.children].forEach(c => c.classList.remove("selected"));
-        card.classList.add("selected");
-        save();         // 선택 저장(누적 점수 포함)
-        renderPager();  // 진행도 색 즉시 반영
+      // === 선택 처리: 저장 → 진행도 갱신 → (완료 시) 팝업 or 자동 다음 ===
+card.addEventListener("click", () => {
+  state.answers[q.id] = opt.id;
+  [...optsEl.children].forEach(c => c.classList.remove("selected"));
+  card.classList.add("selected");
+  save();         // 선택 저장(누적 점수 포함)
+  renderPager();  // 진행도 색 즉시 반영
 
-        // 자동 다음(마지막이면 결과/검증)
-        setTimeout(() => {
-          if (state.idx < total() - 1) {
-            state.idx++;
-            setHash();
-            renderQuestion();
-          } else {
-            tryShowResult();
-          }
-        }, 120);
-      });
+  // ✅ 모든 문항이 답변 완료된 순간, 어디서든 바로 '결과보기' 팝업 표시
+  if (getUnansweredList().length === 0) {
+    showCompleteModal();   // 팝업 띄우고
+    return;                // 자동 다음 이동 중단
+  }
+
+  // 자동 다음(마지막이면 미응답 검사 → 경고/완료 팝업)
+  setTimeout(() => {
+    if (state.idx < total() - 1) {
+      state.idx++;
+      setHash();
+      renderQuestion();
+    } else {
+      tryShowResult(); // 미응답 있으면 경고 팝업, 없으면 완료 팝업
+    }
+  }, 120);
+});
 
       // 조립
       card.appendChild(imgWrap);
