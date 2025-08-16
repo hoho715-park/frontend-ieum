@@ -317,3 +317,33 @@ body.qscc-info-page {
   font-weight: 400;
   font-style: normal;
 }
+
+/* 카드가 내용 길이에 맞춰 늘어나도록 */
+.opt-card{
+  height: auto;        /* 고정 높이 해제 */
+  min-height: 453px;   /* 기존 디자인 최소 높이는 유지 */
+}
+
+/* 설명은 모두 표시 (스크롤 제거) */
+.opt-desc{
+  max-height: none;
+  overflow: visible;
+}
+
+/* 길게 붙은 단어도 줄바꿈 되도록(한글/영문 모두) */
+.opt-title,
+.opt-desc,
+.opt-desc li{
+  word-break: keep-all;      /* 한글 어절 유지 */
+  overflow-wrap: anywhere;   /* 너무 긴 영문/숫자도 줄바꿈 */
+}
+
+/* 선지(옵션) 텍스트 전용 폰트 */
+.qscc-test .opt-title,      /* 선지 라벨 텍스트 */
+.qscc-test .opt-desc,       /* 설명 블록 */
+.qscc-test .opt-desc li,    /* 설명 항목 */
+.qscc-test .opt-mark {      /* a. b. c. */
+  font-family: "Poor Story", system-ui;
+  font-weight: 500;
+  font-style: normal;
+}
