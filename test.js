@@ -38,6 +38,63 @@
     ]
   };
 
+  /* ===== 체질별 빙고 데이터(예시 25칸) ===== */
+const BINGO = {
+  "태양인": [
+    "비전·목표 먼저 세움","리더 맡는 편","의사결정 빠름","위기대응 강함","문제 해결 욕구 강함",
+    "직설적 화법","효율 집착","성과지향","새로운 시도 좋아함","임기응변 능함",
+    "데이터로 설득","도전 즐김","태양인", /* 중앙(12) 체질명은 자동 대체 */
+    "책임감 강함","피드백 직접적",
+    "속도 중시","질보다 양 아님(둘 다)","판단 기준 명확","주도권 선호","경쟁심 있음",
+    "큰 그림 잘 봄","단호함","장기전략 수립","회의 진행 잘함","실행력 좋음"
+  ],
+  "태음인": [
+    "끈기·지속성","신중한 결정","안정 선호","현실감각 좋음","리스크 관리",
+    "관계 오래 유지","실무 꼼꼼","완성도 중시","체계화 잘함","상세 매뉴얼 선호",
+    "팀워크 중시","검증·테스트 철저","태음인",
+    "자료 수집 철저","과정 기록 습관",
+    "루틴 유지","건강/생활 관리","꾸준한 개선","참을성 좋음","전통/규범 존중",
+    "중장기 관점","돈 관리 탄탄","꾸준한 학습","책임감 무겁게","약속 지킴"
+  ],
+  "소양인": [
+    "활동적 에너지","아이디어 풍부","대화 활발","적응 빠름","사교성 좋음",
+    "새로움 선호","다양한 관심","즉흥 기획도 OK","동기부여 중요","감정 표현 솔직",
+    "분위기 메이커","네트워킹 강점","소양인",
+    "유연한 사고","변화 수용",
+    "즐거움 추구","멀티태스킹 선호","실행 속도 빠름","트렌드 민감","직관 활용",
+    "칭찬에 강함","설득/프레젠테이션","스몰토크 능숙","아이디어 시각화","분위기 주도"
+  ],
+  "소음인": [
+    "분석 좋아함","세부 기준 명확","집중력 좋음","차분/신중","관찰력 세밀",
+    "정리·정돈 습관","문서/노트 정리","원인 파고듦","논리 전개","사전 준비 철저",
+    "차분한 소통","사실 기반 보고","소음인",
+    "리스크 선제 차단","일관된 품질",
+    "계획 → 실행 준수","혼자 일도 능숙","깊이 있는 탐구","감정 절제","깔끔한 마감",
+    "문제 재발 방지책","데이터 비교","체크리스트 애용","디테일 검수","완벽주의 성향"
+  ]
+};
+
+/* 5×5 빙고 HTML 생성 */
+function renderBingo(type){
+  const raw = (BINGO[type] || []).slice(0, 25);
+  // 25칸 맞추기
+  while (raw.length < 25) raw.push("");
+  // 중앙(12번째) 칸은 체질명 표시
+  const cells = raw.map((t, i) => {
+    const isCenter = i === 12;
+    const txt = isCenter ? type : t;
+    const cls = "bingo-cell" + (isCenter ? " bingo-free" : "");
+    return `<div class="${cls}">${txt || ""}</div>`;
+  }).join("");
+  return `
+    <div class="qscc-bingo">
+      <div class="bingo-head"><div class="bingo-title"><체질별 특징 빙고></div></div>
+      <div class="bingo-grid">${cells}</div>
+    </div>
+  `;
+}
+
+
   const state = { data: null, idx: 0, answers: {} };
 
   // DOM
@@ -494,6 +551,28 @@ function renderResult() {
     </div>
   `;
 
+   //체질 빙고 HTML 생성
+  const bingoHTML = renderBingo(winner);
+
+  qcard.hidden = true; 
+  result.hidden = false;
+  result.innerHTML = `
+    <div class="result-title" style="text-align:center">
+      당신은 ${winnerHTML} 입니다.
+    </div>
+
+    ${chart}
+
+    ${bingoHTML}   <!-- 도넛과 버튼 사이에 빙고 넣기 -->
+
+    <div style="display:flex;gap:12px;justify-content:center;margin-top:18px">
+      <a class="btn btn-prev" href="./test.html#q=1" data-reset="true" id="restartBtn"
+         style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">처음부터 다시</a>
+      <a class="btn btn-next" href="./whatisqscc.html" data-reset="true"
+         style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">솔루션 보기</a>
+    </div>
+  `;
+  
   const restartBtn = document.getElementById("restartBtn");
   if (restartBtn) {
     restartBtn.addEventListener("click", (e) => {

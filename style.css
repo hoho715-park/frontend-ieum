@@ -347,3 +347,55 @@ body.qscc-info-page {
   font-weight: 500;
   font-style: normal;
 }
+
+/* ===== 결과 빙고판 ===== */
+.qscc-bingo { 
+  max-width: 680px; 
+  margin: 20px auto 28px; 
+}
+
+.bingo-head {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  margin-bottom: 10px;
+}
+
+.bingo-title {
+  font-weight: 800; font-size: 20px;
+  font-family: "Poor Story", system-ui;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.bingo-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+}
+
+.bingo-cell {
+  background: #F6E089;              /* 밝은 노랑 */
+  border: 2px solid #E6D06A;
+  border-radius: 10px;
+  padding: 10px 8px;
+  min-height: 78px;                 /* 줄 수 많을 때 자동 확장 */
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  font-weight: 700;
+  line-height: 1.25;
+  word-break: keep-all;             /* 한글 어절 유지 */
+  overflow-wrap: anywhere; 
+  font-family: "Poor Story", system-ui;
+  font-weight: 700;
+  font-style: normal;         /* 긴 영문 줄바꿈 */
+}
+
+/* 가운데 FREE(체질명) 칸 강조 */
+.bingo-cell.bingo-free {
+  background: #B2B0E8;
+  border-color: #9D9AD8;
+  color: #000000;
+  font-weight: 900;
+  font-family: "Poor Story", system-ui;
+  font-style: normal;
+  font-size: 30px;
+}
