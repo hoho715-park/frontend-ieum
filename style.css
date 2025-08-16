@@ -240,14 +240,25 @@ body.qscc-info-page {
 /* 하단 라벨 (a./b./c. + 텍스트) */
 .opt-meta{display:flex;flex-direction:column;align-items:center;gap:2px;padding-top:6px}
 .opt-mark{font-size:16px;font-weight:700}
-.opt-title{font-size:13px;font-weight:800;line-height:1.1;text-align:center}
+.opt-title{font-size:18px;font-weight:800;line-height:1.1;text-align:center}
 /* 설명문구: 최대 120px 정도만 보여주고 스크롤(고정 높이 카드 유지) */
 .opt-desc{
-  margin:8px 10px 0; padding-top:8px; border-top:2px solid rgba(0,0,0,.08);
-  list-style:none; font-size:14px; line-height:1.35; color:#222;
-  max-height:120px; overflow:auto;
+  margin: 8px 10px 0;
+  padding: 8px 0 0;          /* ← 기본 padding-left 40px 제거 */
+  list-style: none;
+  border-top: 2px solid rgba(0,0,0,.08);
+  font-size: 18px;
+  line-height: 1.35;
+  color: #222;
+  max-height: 120px;
+  overflow: auto;
+
+  text-align: center;        /* ← 중앙 정렬 */
 }
-.opt-desc li{margin:6px 0}
+.opt-desc li{
+  margin: 6px 0;
+  text-align: inherit;       /* 부모의 중앙정렬 상속 */
+}
 
 /* 중앙 정렬(이미 적용돼 있어도 안전핀) */
 .opts-grid{width:max-content;margin:0 auto;justify-content:center}
@@ -295,4 +306,14 @@ body.qscc-info-page {
   font-family: "Do Hyeon", sans-serif;
   font-weight: 400;
   font-style: normal
+}
+
+.qscc-test .opt-title,
+.qscc-test .opt-desc,
+.qscc-test .opt-mark,
+.qscc-test .opt-desc li  {
+  font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
