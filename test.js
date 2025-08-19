@@ -297,81 +297,93 @@ function renderBingo(type){
   }
 
   // 옵션(카드 190×453)
-  function renderOptions(q){
-    const cols = (q.options || []).length || 1;
-    optsEl.style.setProperty('--cols', cols);  // 2/3/4 보기 열 수 전달
-    optsEl.innerHTML = "";
+function renderOptions(q){
+  const cols = (q.options || []).length || 1;
+  optsEl.style.setProperty('--cols', cols);
+  optsEl.innerHTML = "";
+  
+  const qId = Number(q.id); // 질문 ID를 숫자로 변환
 
-    (q.options || []).forEach((opt, i) => {
-      const card = document.createElement("div");
-      card.className = "opt-card" + (state.answers[q.id] === opt.id ? " selected" : "");
+  (q.options || []).forEach((opt, i) => {
+    const card = document.createElement("div");
+    card.className = "opt-card" + (state.answers[q.id] === opt.id ? " selected" : "");
 
-      // 1) 이미지
-      const imgWrap = document.createElement("div");
-      imgWrap.className = "opt-img";
-      const img = document.createElement("img");
-      img.src = opt.image?.src || "";
-      img.alt = opt.image?.alt || opt.label;
-      imgWrap.appendChild(img);
+    // 1) 이미지
+    const imgWrap = document.createElement("div");
+    imgWrap.className = "opt-img";
+    const img = document.createElement("img");
+    img.src = opt.image?.src || "";
+    img.alt = opt.image?.alt || opt.label;
+    imgWrap.appendChild(img);
 
-      // 2) 라벨/제목
-      const meta = document.createElement("div");
-      meta.className = "opt-meta";
+    // 2) 라벨/제목
+    const meta = document.createElement("div");
+    meta.className = "opt-meta";
+    
+    // ✅ 12번 이하 문제와 13번 이상 문제의 UI를 다르게 처리
+    if (qId <= 12) {
+      // 12번 이하 문제: a. b. c. 와 함께 제목(label)을 표시
       const mark = document.createElement("div");
       mark.className = "opt-mark";
-      mark.textContent = `${String.fromCharCode(97 + i)}.`;  // a. b. c. d.
+      mark.textContent = `${String.fromCharCode(97 + i)}.`; // a. b. c.
+      meta.appendChild(mark);
+
       const title = document.createElement("div");
       title.className = "opt-title";
       title.textContent = opt.label || "";
-      meta.appendChild(mark);
       meta.appendChild(title);
-
-      // 3) 설명(배열/문자열 모두 지원)
-      const descWrap = document.createElement("ul");
-      descWrap.className = "opt-desc";
-      const lines = Array.isArray(opt.desc) ? opt.desc
-                  : typeof opt.desc === "string" ? opt.desc.split(/\n+/) : [];
-      lines.forEach(t => {
-        if (!t) return;
-        const li = document.createElement("li");
-        li.textContent = t;
-        descWrap.appendChild(li);
-      });
-
-      // === 선택 처리: 저장 → 진행도 갱신 → 자동 다음 ===
-      // === 선택 처리: 저장 → 진행도 갱신 → (완료 시) 팝업 or 자동 다음 ===
-card.addEventListener("click", () => {
-  state.answers[q.id] = opt.id;
-  [...optsEl.children].forEach(c => c.classList.remove("selected"));
-  card.classList.add("selected");
-  save();         // 선택 저장(누적 점수 포함)
-  renderPager();  // 진행도 색 즉시 반영
-
-  // ✅ 모든 문항이 답변 완료된 순간, 어디서든 바로 '결과보기' 팝업 표시
-  if (getUnansweredList().length === 0) {
-    showCompleteModal();   // 팝업 띄우고
-    return;                // 자동 다음 이동 중단
-  }
-
-  // 자동 다음(마지막이면 미응답 검사 → 경고/완료 팝업)
-  setTimeout(() => {
-    if (state.idx < total() - 1) {
-      state.idx++;
-      setHash();
-      renderQuestion();
-    } else {
-      tryShowResult(); // 미응답 있으면 경고 팝업, 없으면 완료 팝업
+      
+    } else { 
+      // 13번 이상 문제: 제목(label)만 표시하고 a. b.를 생략
+      const title = document.createElement("div");
+      title.className = "opt-title";
+      title.textContent = opt.label || "";
+      meta.appendChild(title);
     }
-  }, 120);
-});
 
-      // 조립
-      card.appendChild(imgWrap);
-      card.appendChild(meta);
-      card.appendChild(descWrap);
-      optsEl.appendChild(card);
+    // 3) 설명 (배열/문자열 모두 지원)
+    const descWrap = document.createElement("ul");
+    descWrap.className = "opt-desc";
+    const lines = Array.isArray(opt.desc) ? opt.desc
+                  : typeof opt.desc === "string" ? opt.desc.split(/\n+/) : [];
+    lines.forEach(t => {
+      if (!t) return;
+      const li = document.createElement("li");
+      li.textContent = t;
+      descWrap.appendChild(li);
     });
-  }
+
+    // === 선택 처리: 저장 → 진행도 갱신 → (완료 시) 팝업 or 자동 다음 ===
+    card.addEventListener("click", () => {
+      state.answers[q.id] = opt.id;
+      [...optsEl.children].forEach(c => c.classList.remove("selected"));
+      card.classList.add("selected");
+      save();
+      renderPager();
+
+      if (getUnansweredList().length === 0) {
+        showCompleteModal();
+        return;
+      }
+
+      setTimeout(() => {
+        if (state.idx < total() - 1) {
+          state.idx++;
+          setHash();
+          renderQuestion();
+        } else {
+          tryShowResult();
+        }
+      }, 120);
+    });
+
+    // 조립
+    card.appendChild(imgWrap);
+    card.appendChild(meta);
+    card.appendChild(descWrap);
+    optsEl.appendChild(card);
+  });
+}
 
   // 진행도 점
   // 진행도 점 (10문항씩 페이징)
