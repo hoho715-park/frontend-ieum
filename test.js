@@ -507,7 +507,7 @@ function donutChart(percentages) {
   `).join("");
 
   return `
-    <div style="display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:16px">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:16px;margin:24px 0 64px">
       <svg width="${SIZE}" height="${SIZE}" viewBox="0 0 ${SIZE} ${SIZE}">
         ${arcs}
         ${hole}
