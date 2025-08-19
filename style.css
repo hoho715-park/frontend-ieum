@@ -159,7 +159,6 @@ body.qscc-info-page {
 }
 
 /* [공통 헤더] — 메인과 동일 */
-.qscc-header { width: 1354px; height: 60px; margin-top: 65px; }
 .header-inner {
   width: 100%; height: 100%;
   display: grid;
@@ -398,4 +397,167 @@ body.qscc-info-page {
   font-family: "Poor Story", system-ui;
   font-style: normal;
   font-size: 30px;
+}
+
+/* 화면 100%일때 레이아웃 수정 */
+.qscc-header{
+  width: 1354px;
+  height: 60px;
+  margin: 32px auto 0;      /* 위쪽 여백 통일(원하면 24~40px로 조절) */
+}
+.qscc-header .header-inner{
+  display: grid;
+  grid-template-columns: 121px 166px max-content 238px 50px;
+  align-items: center;
+}
+
+/* ==================================================
+   2) 섹션 스케일(헤더는 스케일 적용 안 함 — 고정 유지)
+      - 숫자만 바꿔서 더 작게/크게 조절 가능
+      - qscc-landing  : 메인(시작/설명 버튼 보이게 더 줄임)
+      - qscc-test .wrap: 테스트 페이지 본문
+      - qscc-info     : "QSCCII 설문이란?" 페이지 본문
+   ================================================== */
+:root{
+  --landing-scale: .74;   /* 메인 페이지 74%  → 버튼 더 확실히 보이게 */
+  --test-scale:    .86;   /* 테스트 페이지 86%  */
+  --info-scale:    .86;   /* whatisqscc 페이지 86% */
+}
+
+/* 메인(랜딩) 섹션만 축소 */
+.qscc-landing{
+  transform: scale(var(--landing-scale));
+  transform-origin: top center;
+}
+/* transform은 레이아웃 높이 자체는 안 줄이므로 여백 보정 */
+.qscc-landing::after{
+  content: "";
+  display: block;
+  height: calc(1000px * (1 - var(--landing-scale))); /* 필요 시 숫자 살짝 조절 */
+}
+
+/* 테스트 본문 축소 */
+.qscc-test .wrap{
+  transform: scale(var(--test-scale));
+  transform-origin: top center;
+}
+.qscc-test .wrap::after{
+  content: "";
+  display: block;
+  height: calc(900px * (1 - var(--test-scale)));
+}
+
+/* whatisqscc 본문 축소 */
+.qscc-info{
+  transform: scale(var(--info-scale));
+  transform-origin: top center;
+}
+.qscc-info::after{
+  content: "";
+  display: block;
+  height: calc(1000px * (1 - var(--info-scale)));
+}
+
+/* (선택) 메인 비주얼·버튼 사이 여백 살짝 줄여서 버튼 더 노출 */
+.main-image-wrap{ margin-top: 16px; }
+
+/* 공통 변수(이미 있더라도 재선언 OK) */
+:root{
+  --header-w: 1354px;
+  --header-h: 60px;
+  --header-top: 32px;
+  --landing-scale: .74;  /* 메인에서 쓰는 값과 반드시 동일 */
+}
+
+/* 기본 헤더 치수(덮어쓰기) */
+.qscc-header{
+  width: var(--header-w);
+  height: var(--header-h);
+  margin: var(--header-top) auto 0 !important;  /* 상단 32px 기준값 */
+}
+
+/* ▼ test 페이지에서만: 메인과 똑같이 보이도록 헤더 자체를 축소 */
+.qscc-test > .qscc-header{
+  /* 메인 헤더와 동일한 시각 크기를 만들기 위해 같은 스케일 적용 */
+  transform: scale(var(--landing-scale));
+  transform-origin: top center;
+
+  /* margin은 레이아웃 값이므로 눈에 보이는 간격도 .74배로 줄여줘야 동일해 보임 */
+  margin-top: calc(var(--header-top) * var(--landing-scale)) !important;
+
+  /* 가운데 정렬 보정(시각 박스가 줄어도 가운데 유지) */
+  width: var(--header-w);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.qscc-info > .qscc-header{
+  transform: scale(var(--landing-scale));
+  transform-origin: top center;
+  margin-top: calc(var(--header-top) * var(--landing-scale)) !important;
+  width: var(--header-w);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 헤더 내부 그리드는 공통 유지 */
+.qscc-header .header-inner{
+  display: grid;
+  grid-template-columns: 121px 166px max-content 238px 50px;
+  align-items: center;
+}
+
+/* 1) 기존 고정 스케일/가짜 높이 보정 제거 */
+.qscc-test .wrap::after{ content:none !important; height:0 !important; }
+
+/* 2) 헤더 아래 간격과 전체 스케일을 뷰포트 기준으로 계산 */
+:root{
+  --header-h: 60px;           /* 헤더 높이(공통) */
+}
+.qscc-test .wrap{
+  /* 헤더와의 간격: 필요시 24~56px로만 조절 */
+  --fit-top-gap: 36px;
+
+  /* 질문+선지+진행도 총 원본 높이(디자인 기준). 작게/크게 보이면 940~1080에서 미세조정 */
+  --fit-target-h: 980px;
+
+  /* 화면 높이에 맞춰 자동 스케일(너무 작아지면 .60까지) */
+  --fit-scale: clamp(.60,
+    calc((100vh - var(--header-h) - var(--fit-top-gap)) / var(--fit-target-h)),
+    .90
+  );
+
+  margin-top: var(--fit-top-gap) !important;   /* 헤더와 간격 확 줄임 */
+  transform: scale(var(--fit-scale)) !important;
+  transform-origin: top center;
+  width: 1040px;
+  margin-left: auto; margin-right: auto;
+  overflow: visible;
+}
+
+/* 3) 내부 여백 압축(질문/선지/진행도 블록 간격 최소화) */
+.qscc-test .q-card{ padding: 18px; }
+.qscc-test .q-title{ margin: 0 0 4px; font-size: 26px; line-height: 1.2; text-align: center; }
+.qscc-test .q-text { margin: 0 0 18px; font-size: 40px; line-height: 1.2; text-align: center; }
+
+.qscc-test .opts-grid{ gap: 16px; }     /* 카드 사이 간격 압축 */
+.qscc-test .opt-img { height: 240px; }  /* 260 → 240로 살짝 줄임 */
+
+.qscc-test .nav{ margin-top: 12px; }    /* 진행도 바로 붙이기 */
+.qscc-test .pager{ gap: 8px; }
+.qscc-test .page-dot{ width: 28px; height: 28px; font-size: 13px; }
+.qscc-test .page-arrow{ width: 32px; height: 32px; }
+
+/* 기본: 헤더 바로 아래에 거의 붙여 시작 */
+.qscc-test .wrap{
+  /* 기존 120px을 덮어씀 */
+  margin-top: 12px !important;   /* 원하면 8~20px 사이로 조절 */
+}
+
+@media (max-height: 900px){
+  .qscc-test .wrap{ margin-top: 6px !important; }
+}
+@media (max-height: 800px){
+  .qscc-test .wrap{ margin-top: 2px !important; }
 }
